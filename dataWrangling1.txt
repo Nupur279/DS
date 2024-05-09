@@ -1,0 +1,34 @@
+import numpy as np
+import pandas as pd
+
+df = pd.read_csv(r"C:\Social_Network_Ads.csv")
+
+df.head()
+df.describe
+
+m = df['Age'].mean()
+m
+
+df.loc[0,"Age"] =np.NaN
+
+df['Age'].replace(np.NaN,m, inplace=True)
+
+df['Age'].value_counts().idxmax()
+
+#data satandarazation converting salary from iNR to doller
+# Current exchange rate from INR to USD
+exchange_rate = 0.014
+df['EstimatedSalary'] = df['EstimatedSalary'] * exchange_rate
+
+df.columns
+
+import seaborn as sns
+sns.boxplot(x='Gender',y='Age',data=df)
+
+
+#changing categorical variable into qualitative variable means change gender male female to 0 and 1
+
+df['Gender'].replace({"Female":0,"Male":1},inplace=True)
+
+
+df.head()

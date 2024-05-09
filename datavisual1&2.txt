@@ -1,0 +1,65 @@
+import seaborn as sns
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = sns.load_dataset('titanic')
+
+
+df.head()
+
+#single varient distplot
+sns.distplot(x=df['age'],bins=10, kde=True)
+
+# #bivirient distplot
+
+sns.distplot(df['age'], hist=True, kde=True, label='Age')
+sns.distplot(df['fare'], hist=True, kde=True, label='Fare')
+plt.legend()
+
+sns.jointplot(x=df['age'],y=df['fare'],kind ='scatter')
+
+
+sns.barplot(x=df['sex'],y=df['age'],hue=df["sex"])
+plt.show()
+
+
+#multivarient bar plot
+sns.barplot(x='sex',y='age',data=df,hue='survived')
+
+sns.countplot(x=df['sex'])
+
+sns.boxplot(x=df['sex'],y=df['age'])
+
+#multivariate box plot
+sns.boxplot(x='sex',y='age',hue='survived',data=df)
+
+sns.violinplot(x='sex', y='age', data=df, hue='survived')
+
+sns.stripplot(x='sex',y='age', data=df, jitter=True, hue='survived')
+
+sns.swarmplot(x='sex', y='age',data=df)
+
+#biviiernnt heatmap
+sns.heatmap(pd.crosstab(df['age'],df['survived']))
+
+
+sns.histplot(df['age'],kde=True,bins=4)
+
+sns.countplot(x=df['sex'])
+plt.show()
+
+df['sex'].value_counts().plot(kind="pie", autopct="%.1f")
+#plt.show()
+
+plt.hist(df['age'],bins=5)
+plt.show()
+
+sns.distplot(df['age'],kde=False,bins=5)
+
+#multivarient scatter plot
+sns.scatterplot(x="age",y="sibsp",data=df,hue = "survived")
+plt.show()
+
+sns.pairplot(df, hue="survived")
+plt.legend(title="Survived", loc='upper right')

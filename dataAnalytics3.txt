@@ -1,0 +1,59 @@
+import pandas as pd
+import numpy as np
+from sklearn.metrics import confusion_matrix, accuracy_score,precision_score, recall_score,mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+
+df = pd.read_csv(r"C:\Iris.csv")
+
+df.head()
+
+df.columns
+
+df.isnull().sum()
+
+X = df[['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']]
+y = df['Species']
+
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=40)
+
+
+model = GaussianNB()
+model.fit(x_train,y_train)
+
+y_pred = model.predict(x_test)
+y_pred
+
+model.score(x_test, y_test)
+
+cm = confusion_matrix(y_test,y_pred)
+cm
+
+def get_confusion_matrix_values(y_true, y_pred):
+    cm = confusion_matrix(y_true, y_pred)
+    return(cm[0][0], cm[0][1], cm[1][0], cm[1][1])
+
+TP, FP, FN, TN = get_confusion_matrix_values(y_test, y_pred)
+print("TP: ", TP)
+print("FP: ", FP)
+print("FN: ", FN)
+print("TN: ", TN)
+
+a = accuracy_score(y_pred, y_test)
+a
+
+# print("The Accuracy is ", (TP+TN)/(TP+TN+FP+FN))
+# print("The precision is ", TP/(TP+FP))
+# print("The recall is ", TP/(TP+FN))
+
+error = 1-a
+error
+
+# p = precision_score(y_pred, y_test)
+# p
+
+print("The precision is ", TP/(TP+FP))
+
+print("The recall is ", TP/(TP+FN))

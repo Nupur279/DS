@@ -1,0 +1,56 @@
+
+import nltk
+nltk.download()
+
+x = "hii I am Firstname lastname"
+type(x)
+
+#tokenization
+from nltk.tokenize import word_tokenize, sent_tokenize
+z = word_tokenize(x)
+y = sent_tokenize(x)
+print(z)
+print(y)
+
+#pos tagging
+
+sen1 = "hello guys i'm ABC from the university SPPU"
+sen2 = "and i am collage student"
+from nltk import pos_tag
+
+token = word_tokenize(sen1) + word_tokenize(sen2)
+tagged = pos_tag(token)
+print("tagging part of speech:", tagged)
+
+
+#stop word removal
+from nltk.corpus import stopwords
+stop_words = stopwords.words('english')
+token = word_tokenize(sen1)
+cleaned_token = []
+
+for word in token:
+    if word not in stop_words:
+        cleaned_token.append(word)
+        
+print("unclean version", token)
+print("\ncleaned  version",cleaned_token)
+
+
+#stemming
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
+token = word_tokenize(sen1)
+
+stemmed = [stemmer.stem(word) for word in token]
+print(" ".join(stemmed))
+
+
+#lemmatization
+
+from nltk.stem import WordNetLemmatizer
+
+lemmatizer = WordNetLemmatizer()
+token = word_tokenize(sen1)
+lemmatized_output = [lemmatizer.lemmatize(word) for word in token]
+print(lemmatized_output)

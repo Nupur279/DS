@@ -1,0 +1,71 @@
+import numpy as np
+import pandas as pd
+
+df=pd.read_csv("E:\DSBDA\iris\iris.csv")
+
+print(df)
+df.describe()
+
+df.groupby('Iris-setosa').describe()
+df.shape
+
+df['5.1'].describe()
+
+df['5.1'].mean()
+
+df['5.1'].std()
+
+df['5.1'].mode()
+
+df['5.1'].median()
+
+df['5.1'].min()
+
+df['5.1'].max()
+
+df['5.1'].quantile()
+
+def calculate_mean(data):
+    return sum(data) / len(data)
+
+def calculate_mode(data):
+    frequency = {}
+    for num in data:
+        frequency[num] = frequency.get(num, 0) + 1
+    return max(frequency, key=frequency.get)
+
+def calculate_median(data):
+    sorted_data = sorted(data)
+    n = len(sorted_data)
+    if n % 2 == 0:
+        return (sorted_data[n//2 - 1] + sorted_data[n//2]) / 2
+    else:
+        return sorted_data[n//2]
+
+# Example usage:
+data = [1, 2, 3, 4, 5, 5, 6, 6, 6]
+mean = calculate_mean(data)
+mode = calculate_mode(data)
+median = calculate_median(data)
+
+print("Mean:", mean)
+print("Mode:", mode)
+print("Median:", median)
+
+
+import math
+
+def calculate_std_dev(data):
+    n = len(data)
+    if n < 2:
+        return None  # Standard deviation is undefined for fewer than two elements
+    
+    mean = sum(data) / n
+    variance = sum((x - mean) ** 2 for x in data) / (n - 1)
+    std_dev = math.sqrt(variance)
+    return std_dev
+
+# Example usage:
+data = [2, 4, 4, 4, 5, 5, 7, 9]
+std_deviation = calculate_std_dev(data)
+print("Standard Deviation:", std_deviation)

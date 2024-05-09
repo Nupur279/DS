@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv(r"C:\StudentsPerformance.csv")
+
+df.head()
+
+df.columns
+
+df.isnull().sum()
+
+#deleting one value
+df.loc[0,'math score']=np.NaN
+
+df.head()
+
+#now removing that null value by its mean
+m = df['math score'].mean()
+df['math score'].replace(np.NaN,m, inplace = True)
+df.head()
+
+#checking and removing outliers
+import seaborn as sns
+sns.boxplot( y = 'reading score' , data = df)
+
+# Define the threshold for identifying outliers
+threshold = 75  # Example threshold for identifying outliers
+
+# Remove outliers from the DataFrame
+df_cleaned = df[df['reading score'] <= threshold]
+
+# Display the cleaned DataFrame
+#print(df_cleaned.head())
+df_cleaned.head()
+
+#data transformation on one variable
+
+df['gender'].replace({"female":0, "male":1}, inplace = True)
+
+df.head()

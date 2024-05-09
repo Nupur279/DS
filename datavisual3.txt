@@ -1,0 +1,41 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+df = sns.load_dataset('iris')
+
+df.head()
+
+df.columns
+
+print(df[10:21])
+
+a=df.iloc[0][1]
+df.replace(a,np.NaN,inplace=True)
+a
+
+df.loc[df["species"]=="Iris-setosa"]
+
+df.head(10).style.highlight_max(color='lightgreen',axis=0)
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Assuming iris is your DataFrame containing the Iris dataset
+
+# Select only numeric columns
+numeric_columns = df.select_dtypes(include='number')
+
+# Create correlation matrix
+correlation_matrix = numeric_columns.corr()
+
+# Plot heatmap
+sns.heatmap(correlation_matrix, cmap="YlGnBu", linecolor='white', linewidths=1)
+plt.show()
+
+
+#Multivariate Analysis:
+# Pair plot is used to visualize the relationship between each type of column variable. It is
+# implemented only by one line code, which is as follows :
+
+sns.pairplot(df,hue="species")
